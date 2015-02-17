@@ -682,7 +682,7 @@ describe Capybara::Webkit::Driver do
                 </head>
                 <body>
                   <script type="text/javascript">
-                    alert('First alert'); 
+                    alert('First alert');
                   </script>
                   <input type="button" onclick="alert('Second alert')" name="test"/>
                 </body>
@@ -715,12 +715,12 @@ describe Capybara::Webkit::Driver do
       end
 
       it 'finds two alert windows in a row' do
-        driver.accept_modal(:alert, text: 'First alert') do 
+        driver.accept_modal(:alert, text: 'First alert') do
           visit('/double')
         end
 
         expect {
-          driver.accept_modal(:alert, text: 'Boom') do 
+          driver.accept_modal(:alert, text: 'Boom') do
             driver.find_xpath("//input").first.click
           end
         }.to raise_error Capybara::ModalNotFound, "Unable to find modal dialog with Boom"
@@ -1796,45 +1796,45 @@ describe Capybara::Webkit::Driver do
     end
   end
 
-  context "custom font app" do
-    let(:driver) do
-      driver_for_html(<<-HTML)
-        <html>
-          <head>
-            <style type="text/css">
-              p { font-family: "Verdana"; }
-              p:before { font-family: "Verdana"; }
-              p:after { font-family: "Verdana"; }
-            </style>
-          </head>
-          <body>
-            <p id="text">Hello</p>
-          </body>
-        </html>
-      HTML
-    end
+  # context "custom font app" do
+  #   let(:driver) do
+  #     driver_for_html(<<-HTML)
+  #       <html>
+  #         <head>
+  #           <style type="text/css">
+  #             p { font-family: "Verdana"; }
+  #             p:before { font-family: "Verdana"; }
+  #             p:after { font-family: "Verdana"; }
+  #           </style>
+  #         </head>
+  #         <body>
+  #           <p id="text">Hello</p>
+  #         </body>
+  #       </html>
+  #     HTML
+  #   end
 
-    before { visit("/") }
+  #   before { visit("/") }
 
-    let(:font_family) do
-      driver.evaluate_script(<<-SCRIPT)
-        var element = document.getElementById("text");
-        element.ownerDocument.defaultView.getComputedStyle(element, null).getPropertyValue("font-family");
-      SCRIPT
-    end
+  #   let(:font_family) do
+  #     driver.evaluate_script(<<-SCRIPT)
+  #       var element = document.getElementById("text");
+  #       element.ownerDocument.defaultView.getComputedStyle(element, null).getPropertyValue("font-family");
+  #     SCRIPT
+  #   end
 
-    it "ignores custom fonts" do
-      font_family.should eq "Arial"
-    end
+  #   it "ignores custom fonts" do
+  #     font_family.should eq "Arial"
+  #   end
 
-    it "ignores custom fonts before an element" do
-      font_family.should eq "Arial"
-    end
+  #   it "ignores custom fonts before an element" do
+  #     font_family.should eq "Arial"
+  #   end
 
-    it "ignores custom fonts after an element" do
-      font_family.should eq "Arial"
-    end
-  end
+  #   it "ignores custom fonts after an element" do
+  #     font_family.should eq "Arial"
+  #   end
+  # end
 
   context "cookie-based app" do
     let(:driver) do

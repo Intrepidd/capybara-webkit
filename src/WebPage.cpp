@@ -111,9 +111,9 @@ void WebPage::loadJavascript() {
 }
 
 void WebPage::setUserStylesheet() {
-  QString data = QString("*, :before, :after { font-family: 'Arial' ! important; }").toUtf8().toBase64();
-  QUrl url = QUrl(QString("data:text/css;charset=utf-8;base64,") + data);
-  settings()->setUserStyleSheetUrl(url);
+  // QString data = QString("*, :before, :after { font-family: 'Arial' ! important; }").toUtf8().toBase64();
+  // QUrl url = QUrl(QString("data:text/css;charset=utf-8;base64,") + data);
+  // settings()->setUserStyleSheetUrl(url);
 }
 
 QString WebPage::userAgentForUrl(const QUrl &url ) const {
